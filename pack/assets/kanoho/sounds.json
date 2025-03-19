@@ -1,0 +1,14 @@
+{
+  "ship.jump.exit": {
+    "sounds": ["kanoho:ship/jump_exit"]
+  },
+  "item.alcubierre_drive.self": {
+    "sounds": ["kanoho:item/alcubierre_drive_self"]
+  },
+  "item.alcubierre_drive.other": {
+    "sounds": ["kanoho:item/alcubierre_drive_other"]
+  },
+  "item.error": {
+    "sounds": ["kanoho:item/error"]
+  }
+}

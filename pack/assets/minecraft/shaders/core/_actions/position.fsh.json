@@ -1,0 +1,24 @@
+{
+    "action": "select",
+    "require_match": true,
+    "value": {
+        "action": "config_value",
+        "path": "skybox.quality"
+    },
+    "cases": [
+        {
+            "when": "classic",
+
+            "action": {
+                "action": "read",
+                "file": "classic.position.fsh"
+            }
+        },
+        {
+            "when": ["low", "normal", "high"],
+            "action": {
+                "action": "read"
+            }
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "default": {
+        "skybox": {
+            "quality": "normal"
+        }
+    },
+
+    "classic": {
+        "skybox.quality": "classic"
+    },
+    "low": {
+        "skybox.quality": "low"
+    },
+    "normal": {
+        "skybox.quality": "normal"
+    },
+    "high": {
+        "skybox.quality": "high"
+    }
+}

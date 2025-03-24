@@ -2,7 +2,7 @@ import json
 from typing import Any
 import os.path
 from os import walk
-
+import sys
 
 import actions
 import actions.action
@@ -62,8 +62,28 @@ def run_file_actions(config: dict[str, Any], run_dir: str, source_file: str, des
 
 CONFIG_FILE_PATH = "presets.json"
 
+def overide_dict(out: dict[str, Any], values: dict[str, Any]) -> None:
+    for k, v in values.items():
+        path = [k] if not "." in k else k.split(".")
+        dic_parent = out
+        parent_key = path[0]
+        dic = out
+        for key in path:
+            if not key in dic:
+                dic[key] = {}
+            dic_parent = dic
+            parent_key = key
+            dic = dic[key]
+        
+        if isinstance(v, dict):
+            overide_dict(dic, v)
+        else:
+            dic_parent[parent_key] = v
+
 def get_config(name: str | None) -> dict[str, Any]:
-    presets = json.load(CONFIG_FILE_PATH)
+    presets = {}
+    with open(CONFIG_FILE_PATH, "r") as f:
+        presets = json.load(f)
     
     if not "default" in presets:
         raise Exception("Presets file needs a 'default' object.")
@@ -81,7 +101,8 @@ def get_config(name: str | None) -> dict[str, Any]:
         return preset
     
     # Apply preset overides
-    raise Exception("Complex preset overides are not yet supported.")
+    overide_dict(config, preset)
+    return config
 
 GENERATOR_FOLDER_NAME = "_actions"
 PACK_INPUT_DIR = "pack"
@@ -103,7 +124,7 @@ def add_subdirectories(in_path: str, out_path) -> None:
         # Create folders for subdirectories
         add_subdirectories(in_folder, out_folder)
 
-def generate_pack(pack_input_dir: str, pack_output_dir: str):
+def generate_pack(pack_input_dir: str, pack_output_dir: str, config: dict[str, Any]):
     # Generate folders
     if not os.path.isdir(pack_output_dir):
         os.mkdir(pack_output_dir)
@@ -126,8 +147,10 @@ def generate_pack(pack_input_dir: str, pack_output_dir: str):
             
             run_dir = os.path.join(dirpath, GENERATOR_FOLDER_NAME)
 
-            run_file_actions({"skybox": {"quality": "normal"}}, run_dir, source_file, destination_file)
+            run_file_actions(config, run_dir, source_file, destination_file)
 
 
 if __name__ == "__main__":
-    generate_pack(PACK_INPUT_DIR, PACK_OUTPUT_DIR)
+    preset = sys.argv[1] if len(sys.argv) > 1 else None
+    config = get_config(preset)
+    generate_pack(PACK_INPUT_DIR, PACK_OUTPUT_DIR, config)

@@ -1,0 +1,44 @@
+{
+    "model": {
+        "type": "minecraft:select",
+        "cases": [
+            {
+                "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "kanoho:item/pocket_alcubierre_drive_cooldown"
+                    },
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "kanoho:item/pocket_alcubierre_drive"
+                    }
+                },
+                "when": "doc_alcubierre"
+            },
+            {
+                "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+
+                    "on_true": {
+                        "type": "minecraft:model",
+                        "model": "kanoho:item/terra_staff_active"
+                    },
+                    "on_false": {
+                        "type": "minecraft:model",
+                        "model": "kanoho:item/terra_staff"
+                    }
+                },
+                "when": "terra_staff"
+            }
+        ],
+        "fallback": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/clay_ball"
+        },
+        "property": "minecraft:custom_model_data"
+    }
+}

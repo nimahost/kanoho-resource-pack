@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
@@ -13,19 +13,24 @@ jobs:
     strategy:
       fail-fast: true
 
-      matrix:
-        os: [ubuntu-latest]
-        preset: [classic, low, normal, high]
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Generate Pack
-        run: python3 generate.py ${{ matrix.preset }}
+        run: python3 generate.py classic low normal high
 
       - name: Zip Archive
-        run: cd output && 7z a -mx9 -tzip ../zip/kanoho-space-${{matrix.preset}}.zip *
+        run: |
+          for dir in /output/*/ do
+            cd $dir &&
+            dir=${dir%*/}
+            7z a -mx9 -tzip ../../zip/kanoho-space-${dir##*/}.zip *
+            && cd ../../
+          done
+
+      - name: Generate Hash
+        run: python3 hash.py zip zip/checksums.txt
 
       - name: Upload Assets to Release
         uses: softprops/action-gh-release@v2

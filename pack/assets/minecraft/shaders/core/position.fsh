@@ -67,7 +67,7 @@ vec3 voronoi3d(const in vec3 x, const in float x_loop_dist) {
 #define tau 6.28318531
 #define itau 0.159154943
 
-//# section start quality high
+//# comment_section start quality=high
 // // High Quality Nebulas
 // const float cfg_step_long = 0.2;
 // const float cfg_step_short = 0.08;
@@ -91,9 +91,9 @@ vec3 voronoi3d(const in vec3 x, const in float x_loop_dist) {
 // const int cfg_extra_star_layers = 40;
 // const float cfg_min_star_radius = cfg_step_long;
 // const float cfg_max_star_radius = 6;
-//# section end
+//# comment_section end
 
-//# section start quality normal
+//# section start quality=normal
 // Normal Nebulas
 const float cfg_step_long = 0.5;
 const float cfg_step_short = 0.1;
@@ -119,7 +119,7 @@ const float cfg_min_star_radius = cfg_step_long;
 const float cfg_max_star_radius = 4;
 //# section end
 
-//# section start quality low
+//# comment_section start quality=low
 // // Low Quality Nebulas
 // const float cfg_step_long = 0.6;
 // const float cfg_step_short = 0.2;
@@ -143,7 +143,7 @@ const float cfg_max_star_radius = 4;
 // const int cfg_extra_star_layers = 5;
 // const float cfg_min_star_radius = cfg_step_long;
 // const float cfg_max_star_radius = 4;
-//# section end
+//# comment_section end
 
 // Other
 vec3 cfg_background = vec3(0.01, 0.01, 0.02);

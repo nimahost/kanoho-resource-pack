@@ -17,7 +17,16 @@
         {
             "when": ["low", "normal", "high"],
             "action": {
-                "action": "read"
+                "action": "process_shader",
+                "shader": {
+                    "action": "read"
+                },
+                "sections": {
+                    "quality": {
+                        "action": "config_value",
+                        "path": "skybox.quality"
+                    }
+                }
             }
         }
     ]

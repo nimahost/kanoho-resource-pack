@@ -33,6 +33,55 @@
                     }
                 },
                 "when": "terra_staff"
+            },
+            {
+                "model": {
+                    "type": "minecraft:condition",
+                    "property": "minecraft:custom_model_data",
+
+                    "on_true": {
+                        "type": "minecraft:composite",
+                        "models": [
+                            {
+                                "type": "minecraft:model",
+                                "model": "kanoho:item/snail/snail_space",
+                                "tints": [
+                                    {
+                                        "type": "minecraft:custom_model_data",
+                                        "index": 1,
+                                        "default": 7851229
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "minecraft:model",
+                                "model": "kanoho:item/snail/snail_space_shell",
+                                "tints": [
+                                    {
+                                        "type": "minecraft:custom_model_data",
+                                        "default": 6177308
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "on_false": {
+                        "type": "minecraft:composite",
+                        "models": [
+                            {
+                                "type": "minecraft:model",
+                                "model": "kanoho:item/snail/snail",
+                                "tints": [
+                                    {
+                                        "type": "minecraft:custom_model_data",
+                                        "default": 6177308
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "when": "pet_snail"
             }
         ],
         "fallback": {

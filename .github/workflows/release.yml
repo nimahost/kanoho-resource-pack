@@ -25,9 +25,9 @@ jobs:
         run: python3 generate.py ${{ matrix.preset }}
 
       - name: Zip build
-        run: 7z a -mx9 -tzip zip/kanoho-space-${{matrix.preset}}.zip output/*
+        run: cd output && 7z a -mx9 -tzip ../zip/kanoho-space-${{matrix.preset}}.zip *
 
       - name: Upload Assets to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: zip/*
+          files: ../zip/*

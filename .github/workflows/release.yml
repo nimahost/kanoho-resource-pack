@@ -18,16 +18,16 @@ jobs:
         preset: [classic, low, normal, high]
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Generate
+      - name: Generate Pack
         run: python3 generate.py ${{ matrix.preset }}
 
-      - name: Zip build
+      - name: Zip Archive
         run: cd output && 7z a -mx9 -tzip ../zip/kanoho-space-${{matrix.preset}}.zip *
 
       - name: Upload Assets to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ../zip/*
+          files: zip/*

@@ -124,8 +124,11 @@ def add_subdirectories(in_path: str, out_path) -> None:
         # Create folders for subdirectories
         add_subdirectories(in_folder, out_folder)
 
-def generate_pack(pack_input_dir: str, pack_output_dir: str, config: dict[str, Any]):
+def generate_pack(pack_input_dir: str, output_dir: str, pack_output_dir: str, config: dict[str, Any]):
     # Generate folders
+    if not os.path.isdir(output_dir):
+        os.mkdir(output_dir)
+
     if not os.path.isdir(pack_output_dir):
         os.mkdir(pack_output_dir)
         add_subdirectories(pack_input_dir, pack_output_dir)
@@ -151,6 +154,10 @@ def generate_pack(pack_input_dir: str, pack_output_dir: str, config: dict[str, A
 
 
 if __name__ == "__main__":
-    preset = sys.argv[1] if len(sys.argv) > 1 else None
-    config = get_config(preset)
-    generate_pack(PACK_INPUT_DIR, PACK_OUTPUT_DIR, config)
+    presets = sys.argv[1:] if len(sys.argv) > 1 else [None]
+    for preset in presets:
+        print(f"Generating '{preset}' preset.")
+        config = get_config(preset)
+        
+        folder = "default" if preset is None else preset.replace(" ", "_")
+        generate_pack(PACK_INPUT_DIR, PACK_OUTPUT_DIR, os.path.join(PACK_OUTPUT_DIR, folder), config)

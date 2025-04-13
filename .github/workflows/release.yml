@@ -24,7 +24,7 @@ jobs:
         run: cd output ; for i in *; do (cd $i ; 7z a -mx9 -tzip "../../zip/kanoho-space-$i.zip" *); done
 
       - name: Generate Checksum
-        run: sha1sum zip/* > zip/checksum.zip
+        run: sha1sum zip/* > zip/checksums.zip
 
       - name: Upload Assets to Release
         uses: softprops/action-gh-release@v2

@@ -15,16 +15,18 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Generate Pack
         run: python3 generate.py classic low normal high
 
       - name: Zip Archive
-        run: cd output ; for i in *; do (cd $i ; 7z a -mx9 -tzip "../../zip/kanoho-space-$i.zip" *); done
+        working-directory: output
+        run: for i in *; do (cd $i ; 7z a -mx9 -tzip "../../zip/kanoho-space-$i.zip" *); done
 
       - name: Generate Checksum
-        run: sha1sum zip/* > zip/checksums.zip
+        working-directory: zip
+        run: sha1sum * > checksums.zip
 
       - name: Upload Assets to Release
         uses: softprops/action-gh-release@v2

@@ -7,8 +7,8 @@
 	"elements": [
 		{
 			"name": "Shell",
-			"from": [6, 6, 6],
-			"to": [10, 12, 12],
+			"from": [6, 8, 6],
+			"to": [10, 14, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 6]},
 			"faces": {
 				"north": {"uv": [8, 13, 10, 16], "texture": "#1", "tintindex": 0},

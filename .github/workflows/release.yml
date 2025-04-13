@@ -21,16 +21,10 @@ jobs:
         run: python3 generate.py classic low normal high
 
       - name: Zip Archive
-        run: |
-          for dir in /output/*/ do
-            cd $dir &&
-            dir=${dir%*/}
-            7z a -mx9 -tzip ../../zip/kanoho-space-${dir##*/}.zip *
-            && cd ../../
-          done
+        run: cd output ; for i in *; do (cd $i ; 7z a -mx9 -tzip "../../zip/kanoho-space-$i.zip" *); done
 
-      - name: Generate Hash
-        run: python3 hash.py zip zip/checksums.txt
+      - name: Generate Checksum
+        run: sha1sum zip/* > zip/checksum.zip
 
       - name: Upload Assets to Release
         uses: softprops/action-gh-release@v2

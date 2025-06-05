@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir -p /etc/apt/keyrings && \
           sudo wget -O /etc/apt/keyrings/packsquash.key https://deb.packages.packsquash.aylas.org/public.key && \
-          echo 'deb [signed-by=/etc/apt/keyrings/packsquash.key] https://deb.packages.packsquash.aylas.org/debian stable main' > /etc/apt/sources.list.d/packsquash.list && \
+          sudo echo 'deb [signed-by=/etc/apt/keyrings/packsquash.key] https://deb.packages.packsquash.aylas.org/debian stable main' > /etc/apt/sources.list.d/packsquash.list && \
           sudo apt update && \ 
           sudo apt install packsquash
 

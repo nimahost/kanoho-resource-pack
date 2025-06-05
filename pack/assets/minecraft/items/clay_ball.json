@@ -4,6 +4,7 @@
         "type": "minecraft:select",
         "cases": [
             {
+                "when": "doc_alcubierre",
                 "model": {
                     "type": "minecraft:condition",
                     "property": "minecraft:custom_model_data",
@@ -16,10 +17,10 @@
                         "type": "minecraft:model",
                         "model": "kanoho:item/pocket_alcubierre_drive"
                     }
-                },
-                "when": "doc_alcubierre"
+                }
             },
             {
+                "when": "terra_staff",
                 "model": {
                     "type": "minecraft:condition",
                     "property": "minecraft:custom_model_data",
@@ -32,10 +33,10 @@
                         "type": "minecraft:model",
                         "model": "kanoho:item/terra_staff"
                     }
-                },
-                "when": "terra_staff"
+                }
             },
             {
+                "when": "pet_snail",
                 "model": {
                     "type": "minecraft:condition",
                     "property": "minecraft:custom_model_data",
@@ -81,8 +82,14 @@
                             }
                         ]
                     }
-                },
-                "when": "pet_snail"
+                }
+            },
+            {
+                "when": "doc_party_popper",
+                "model": {
+                    "type": "minecraft:model",
+                    "model": "kanoho:item/party_popper"
+                }
             }
         ],
         "fallback": {

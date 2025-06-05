@@ -10,5 +10,8 @@
   },
   "item.error": {
     "sounds": ["kanoho:item/error"]
+  },
+  "item.party_popper": {
+    "sounds": ["kanoho:item/party_popper"]
   }
 }

@@ -1,0 +1,5 @@
+pack_directory = "{PACK_DIRECTORY}"
+output_file_path = "{OUTPUT_FILE}"
+
+["assets/kanoho/textures/item/{plume,plume-end}.png"]
+maximum_width_and_height = 65534

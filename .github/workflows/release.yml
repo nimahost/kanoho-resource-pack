@@ -22,15 +22,19 @@ jobs:
 
       - name: Install PackSquash
         run: |
-          mkdir -p /etc/apt/keyrings && \
-          sudo wget -O /etc/apt/keyrings/packsquash.key https://deb.packages.packsquash.aylas.org/public.key && \
-          sudo echo 'deb [signed-by=/etc/apt/keyrings/packsquash.key] https://deb.packages.packsquash.aylas.org/debian stable main' > /etc/apt/sources.list.d/packsquash.list && \
-          sudo apt update && \ 
-          sudo apt install packsquash
+          curl -Lo packsquash.zip https://github.com/ComunidadAylas/PackSquash/releases/download/v0.4.0/PackSquash.CLI.executable.x86_64-unknown-linux-musl.zip
+          unzip packsquash.zip packsquash
+          chmod +x packsquash
 
       - name: Squash Packs
-        working-directory: output
-        run: for i in *; do (packsquash pack_directory=$i output_file_path="../../zip/kanoho-space-$i.zip" packsquash.toml); done
+        run: |
+          mkdir ./zip
+          for i in ./output/*; do
+              PACK="$(basename "$i")"
+              echo "Squishing pack preset: $PACK"
+              CONFIG="$(sed -e "s/{PACK_DIRECTORY}/.\/output\/$PACK/" -e "s/{OUTPUT_FILE}/.\/zip\/kanoho-space-$PACK.zip/" "packsquash.toml")"
+              printf "$CONFIG" | ./packsquash
+          done
 
       - name: Generate Checksum
         working-directory: zip

@@ -20,9 +20,17 @@ jobs:
       - name: Generate Pack
         run: python3 generate.py classic low normal high
 
-      - name: Zip Archive
+      - name: Install PackSquash
+        run: |
+          mkdir -p /etc/apt/keyrings && \
+          wget -O /etc/apt/keyrings/packsquash.key https://deb.packages.packsquash.aylas.org/public.key && \
+          echo 'deb [signed-by=/etc/apt/keyrings/packsquash.key] https://deb.packages.packsquash.aylas.org/debian stable main' > /etc/apt/sources.list.d/packsquash.list && \
+          apt update && \ 
+          apt install packsquash
+
+      - name: Squash Packs
         working-directory: output
-        run: for i in *; do (cd $i ; 7z a -mx9 -tzip "../../zip/kanoho-space-$i.zip" *); done
+        run: for i in *; do (packsquash pack_directory=$i output_file_path="../../zip/kanoho-space-$i.zip" packsquash.toml); done
 
       - name: Generate Checksum
         working-directory: zip
